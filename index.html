@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#402d62">
+  <title>Steady — DBT Diary Card</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .getting-started{max-width:1250px;margin:80px auto 0;background:var(--paper);border:1px solid var(--line);padding:clamp(25px,4vw,45px);box-shadow:var(--shadow)}
+    .getting-started h2{font:500 34px Georgia,serif;margin:8px 0}.getting-started>p:not(.eyebrow){color:var(--muted)}
+    .getting-started ol{display:grid;grid-template-columns:repeat(3,1fr);gap:35px;margin:28px 0;padding-left:22px}
+    .getting-started li{padding-left:5px;line-height:1.55;color:var(--muted)}.getting-started li strong{display:block;color:var(--ink);margin-bottom:4px}
+    .getting-started+.home-grid{margin-top:55px}@media(max-width:760px){.getting-started ol{grid-template-columns:1fr}}
+    .date-picker{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:12px 0}.date-picker input{width:auto;border:1px solid var(--line);background:var(--paper);padding:8px 10px;font:inherit;color:var(--ink)}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Steady home"><span class="brand-mark">S</span><span>Steady</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#home">Home</a>
+      <a href="#checkin">Check-in</a>
+      <a href="#diary">Diary card</a>
+      <a href="#settings">Settings</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">A gentler daily practice</p>
+          <h1>Notice the day.<br><em>Keep what matters.</em></h1>
+          <p class="lede">A private diary card maker for DBT practice. Set up what you want to track, complete a guided daily check-in, and create a weekly card to bring to therapy.</p>
+          <div class="actions">
+            <button class="primary" id="homePrimary" data-go="checkin">Begin today’s check-in <span>→</span></button>
+            <button class="secondary" data-go="diary">View this week</button>
+          </div>
+          <p class="privacy"><span>◆</span> Your entries stay in this browser unless you choose to share them.</p>
+        </div>
+        <aside class="today-card" aria-label="Today's check-in status">
+          <p class="eyebrow">Today</p>
+          <div class="date-number" id="todayNumber"></div>
+          <p id="todayLabel"></p>
+          <div class="status-ring" id="statusRing"><span>Not<br>started</span></div>
+          <button class="text-button" data-go="checkin">Open check-in →</button>
+        </aside>
+      </div>
+      <div class="getting-started" id="gettingStarted">
+        <p class="eyebrow">New here? Start with settings</p>
+        <h2>Set up your diary card</h2>
+        <p>Your app begins blank, so your tracking areas are completely your own.</p>
+        <ol>
+          <li><strong>Open Settings.</strong> Add each emotion, urge, behavior, habit, or goal you want to track.</li>
+          <li><strong>Choose an answer style.</strong> Pick a 0–5 scale, yes/no with a note, or a written reflection.</li>
+          <li><strong>Save your settings.</strong> They stay in this browser and can be changed whenever you want.</li>
+        </ol>
+        <button class="primary" data-go="settings">Set up my tracking areas →</button>
+      </div>
+      <div class="home-grid">
+        <article><span class="number">01</span><h2>Check in honestly</h2><p>Move through your chosen tracking areas at your own pace. There are no wrong answers.</p></article>
+        <article><span class="number">02</span><h2>See the full picture</h2><p>Your diary card and DBT skills table fill in automatically across the week.</p></article>
+        <article><span class="number">03</span><h2>Bring it to therapy</h2><p>Print, save as PDF, or share a clean weekly document whenever you’re ready.</p></article>
+      </div>
+    </section>
+
+    <section id="checkin" class="page narrow">
+      <div class="section-head"><div><p class="eyebrow">Daily interview</p><h1>How was your day?</h1><label class="date-picker">Check-in date <input type="date" id="entryDate"></label><p id="checkinDate"></p></div><div class="progress-wrap"><span id="progressText">1 of 1</span><div class="progress"><i id="progressBar"></i></div></div></div>
+      <form id="checkinForm">
+        <div id="questionArea"></div>
+        <div class="form-nav"><button type="button" class="secondary" id="backQuestion">Back</button><button type="button" class="primary" id="nextQuestion">Continue →</button></div>
+      </form>
+    </section>
+
+    <section id="diary" class="page wide">
+      <div class="section-head"><div><p class="eyebrow">Weekly reflection</p><h1>Your diary card</h1><p id="weekRange"></p></div><div class="actions"><button class="secondary" id="emailBtn">Email</button><button class="secondary" id="shareBtn">Share</button><button class="primary" id="printBtn">Print / Save PDF</button></div></div>
+      <div class="paper">
+        <div class="document-title"><h2 id="documentTitle">DBT Diary Card</h2><p>Generated by Steady</p></div>
+        <div class="table-wrap"><table id="trackingTable"></table></div>
+        <h2 class="skills-title">DBT Skills Tracking</h2>
+        <div class="table-wrap"><table id="skillsTable"></table></div>
+      </div>
+    </section>
+
+    <section id="settings" class="page narrow">
+      <div class="section-head"><div><p class="eyebrow">Make it yours</p><h1>Tracking settings</h1><p>Choose what the daily interview asks. You can change this anytime.</p></div></div>
+      <form id="settingsForm">
+        <div class="settings-card">
+          <h2>Tracking areas</h2><p>Intensity areas use a 0–5 scale. Habits and goals use a yes/no answer with an optional note.</p>
+          <div id="areaList"></div>
+          <button type="button" class="add-button" id="addArea">＋ Add tracking area</button>
+        </div>
+        <div class="settings-card">
+          <h2>Therapist sharing</h2>
+          <label>Therapist email <span>optional</span><input id="therapistEmail" type="email" placeholder="therapist@example.com" autocomplete="email"></label>
+          <p class="fine-print">Steady never sends automatically. The Email button opens your email app with the address filled in.</p>
+        </div>
+        <button class="primary" type="submit">Save settings</button> <span class="saved" id="savedMessage" role="status"></span>
+      </form>
+    </section>
+  </main>
+
+  <footer><span>Steady · DBT Diary Card</span><span>Private by default. Yours to share.</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
