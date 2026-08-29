@@ -11,7 +11,7 @@ function localDate(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth(
 function parseDate(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
 function weekDates(base=parseDate(selectedDate)){const d=new Date(base),day=d.getDay(),offset=day===4?0:(day>4?day-4:day+3);const thu=new Date(d);thu.setDate(d.getDate()-offset);return Array.from({length:7},(_,i)=>{const x=new Date(thu);x.setDate(thu.getDate()+i);return x})}
 function pretty(d,opt={weekday:'long',month:'long',day:'numeric'}){return d.toLocaleDateString(undefined,opt)}
-function go(id){location.hash=id;document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));if(id==='checkin')startInterview();if(id==='diary')renderDiary();if(id==='settings')renderSettings();window.scrollTo(0,0)}
+function go(id){location.hash=id;document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.topbar nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${id}`));if(id==='checkin')startInterview();if(id==='diary')renderDiary();if(id==='settings')renderSettings();window.scrollTo(0,0)}
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 window.addEventListener('hashchange',()=>go(location.hash.slice(1)||'home'));
 

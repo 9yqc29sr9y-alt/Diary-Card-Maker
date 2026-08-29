@@ -13,6 +13,18 @@
     .getting-started li{padding-left:5px;line-height:1.55;color:var(--muted)}.getting-started li strong{display:block;color:var(--ink);margin-bottom:4px}
     .getting-started+.home-grid{margin-top:55px}@media(max-width:760px){.getting-started ol{grid-template-columns:1fr}}
     .date-picker{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:12px 0}.date-picker input{width:auto;border:1px solid var(--line);background:var(--paper);padding:8px 10px;font:inherit;color:var(--ink)}
+    @media(max-width:760px){
+      body{padding-bottom:72px}
+      .topbar{justify-content:center;position:relative}.topbar .brand{font-size:21px}
+      .topbar nav{position:fixed;z-index:100;left:0;right:0;bottom:0;height:66px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,253,248,.98);border-top:1px solid var(--line);box-shadow:0 -8px 25px rgba(48,38,55,.08);padding-bottom:env(safe-area-inset-bottom)}
+      .topbar nav a,.topbar nav a:not(:nth-child(2)){display:flex!important;align-items:center;justify-content:center;text-align:center;padding:8px 3px;color:var(--muted);font-size:12px;font-weight:650}
+      .topbar nav a:hover,.topbar nav a:focus{color:var(--plum);background:var(--lilac)}
+      .topbar nav a.active{color:var(--plum);background:var(--lilac)}
+      .hero h1,.section-head h1{font-size:clamp(39px,12vw,56px)}
+      .actions{width:100%}.actions .primary,.actions .secondary{flex:1;min-width:max-content}
+      .today-card{margin:auto;width:100%}.getting-started{margin-top:50px}
+      footer{padding-bottom:22px;flex-direction:column}
+    }
   </style>
 </head>
 <body>
